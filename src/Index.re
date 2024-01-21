@@ -1,6 +1,10 @@
 module App = {
   [@react.component]
-  let make = () => <Counter />;
+  let make = () =>
+    <div>
+      <Counter /> //
+      <CelsiusConverter />
+    </div>;
 };
 
 ReactDOM.querySelector("#root")
