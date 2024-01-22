@@ -13,7 +13,7 @@ help: ## Print this help message
 
 .PHONY: create-switch
 create-switch: ## Create opam switch
-	opam switch create . 5.1.0 -y --deps-only
+	opam switch create . 5.1.1 -y --deps-only
 
 .PHONY: init
 init: create-switch install ## Configure everything to develop this repository in local
@@ -27,24 +27,25 @@ install: ## Install development dependencies
 
 .PHONY: build
 build: ## Build the project
-	$(DUNE) build @react @node # @react and @node are dune aliases: https://dune.readthedocs.io/en/stable/overview.html#term-alias
+	$(DUNE) build
   # Another way to build the project would be just calling `dune build`, which will build the `@@default` alias: https://dune.readthedocs.io/en/stable/reference/aliases.html#default
 
 .PHONY: build_verbose
 build_verbose: ## Build the project
-	$(DUNE) build --verbose @react @node
+	$(DUNE) build --verbose
 
 .PHONY: serve
 serve: ## Serve the application with a local HTTP server
-	npm run serve
+	npx vite serve --open
 
 .PHONY: bundle
 bundle: ## Bundle the JavaScript application
-	npm run bundle
+	npx vite build
 
 .PHONY: clean
 clean: ## Clean build artifacts and other generated files
 	$(DUNE) clean
+	rm -rf dist
 
 .PHONY: format
 format: ## Format the codebase with ocamlformat
@@ -56,4 +57,4 @@ format-check: ## Checks if format is correct
 
 .PHONY: watch
 watch: ## Watch for the filesystem and rebuild on every change
-	$(DUNE) build --watch @react @node
+	$(DUNE) build --watch

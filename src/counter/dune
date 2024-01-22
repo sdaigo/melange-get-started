@@ -1,0 +1,8 @@
+(melange.emit
+ ; put all JS artifacts in a `_build/default`
+ (target output)
+ ; deps of the stanza
+ (libraries reason-react)
+ (preprocess
+  (pps melange.ppx reason-react-ppx))
+ (module_systems es6))
