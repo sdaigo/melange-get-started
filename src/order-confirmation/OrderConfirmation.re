@@ -1,4 +1,9 @@
 [@react.component]
 let make = () => {
-  <div> {React.string("OrderConfirmation")} </div>;
+  let items: Order.t = [|Sandwich(Ham), Burger, Sandwich(Unicorn)|];
+
+  <div>
+    <h1> {React.string("Order Confirmation")} </h1>
+    <Order items />
+  </div>;
 };
